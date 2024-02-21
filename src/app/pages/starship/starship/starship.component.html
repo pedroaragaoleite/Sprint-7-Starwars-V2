@@ -1,0 +1,37 @@
+@if(ship) {
+<div class="shipdetails container mx-auto">
+    <div class="shipdetails-title">
+        <h3 class="text-3xl font-bold underline">STARSHIP</h3>
+    </div>
+    <div class="shipdetails-card grid grid-cols-2">
+        <div class="shipdetails-img">
+            <img [src]="imgUrl" alt="Starship">
+        </div>
+        <div class="shipdetails-details">
+            <div class="shipdetails-header">
+                <div class="shipdetails-name">
+                    <h4>{{ship.name}}</h4>
+                </div>
+                <div class="shipdetails-description">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis ipsum blanditiis dignissimos?
+                        Distinctio exercitationem quis voluptate quaerat recusandae ut fugit, obcaecati possimus
+                        quibusdam incidunt id saepe adipisci harum corporis fugiat?</p>
+                </div>
+            </div>
+
+            <div class="shipdetails-conf">
+                <ul class="shipdetails-resume">
+                    <li class="shipdetails-model">{{ship.model}}</li>
+                    <li class="shipdetails-cost">{{ship.cost_in_credits}}</li>
+                    <li class="shipdetails-atmosf">{{ship.max_atmosphering_speed}}</li>
+                    <li class="shipdetails-manu">{{ship.manufacture}}</li>
+                    <li class="shipdetails-length">{{ship.length}}</li>
+                    <li class="shipdetails-crew">{{ship.crew}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+} @else {
+<p>no ship in the area</p>
+}

@@ -1,1 +1,49 @@
 /* You can add global styles to this file, and also import other style files */
+// Font Awesome
+@import '@fortawesome/fontawesome-free/css/all.css';
+
+// MDB SCSS
+@import "mdb-angular-ui-kit/assets/scss/mdb.scss";
+
+*,
+::before,
+::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #000000;
+}
+
+ul {
+    margin-bottom: 0 !important;
+    padding-left: 0 !important;
+}
+
+
+a {
+    text-decoration: none;
+    font-size: 14px;
+    color: #ffffff;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+ul,
+
+ol {
+    list-style: none;
+}
+
+body {
+    background-color: #000000;
+}
+
+.card-body {
+    background-color: #000000;
+}
