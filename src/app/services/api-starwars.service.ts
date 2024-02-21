@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { StarshipResults } from '../interfaces/starship-data';
 import { HttpClient, HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { Observable, forkJoin, of, map, mergeMap, tap, catchError, BehaviorSubject } from 'rxjs';
+import { Observable, of, map, tap, catchError, BehaviorSubject } from 'rxjs';
 
 
 @Injectable({

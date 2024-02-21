@@ -1,0 +1,58 @@
+.shipdetails {
+    padding-top: 8px;
+
+    &-title h4 {
+        padding-bottom: 8px;
+        font-size: 24px !important;
+        color: #ffffff !important;
+    }
+
+    &-name h4 {
+        color: #ffffff;
+    }
+
+    &-card {
+        display: grid;
+        grid-template-columns: 40% 60%;
+        grid-template-rows: 1fr;
+        grid-column-gap: 0px;
+        grid-row-gap: 0px;
+        border-radius: 20px !important;
+        width: 100%;
+        height: 250px;
+    }
+
+    &-details {
+        background-color: rgb(36, 36, 36);
+        border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
+    }
+
+    &-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    &-resume>li {
+        font-size: 14px !important;
+        color: #ffffff;
+    }
+
+    &-resume {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr;
+        grid-column-gap: 0px;
+        grid-row-gap: 0px;
+    }
+
+    &-description {
+        font-size: 14px;
+        color: #ffffff;
+    }
+
+    &-details {
+        padding: 10px;
+    }
+}

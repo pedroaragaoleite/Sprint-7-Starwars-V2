@@ -5,6 +5,8 @@
 // MDB SCSS
 @import "mdb-angular-ui-kit/assets/scss/mdb.scss";
 
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
 *,
 ::before,
 ::after {
@@ -15,6 +17,9 @@
 
 body {
     background-color: #000000;
+    font-family: "Space Mono", monospace;
+    font-weight: 400;
+    font-style: normal;
 }
 
 ul {
