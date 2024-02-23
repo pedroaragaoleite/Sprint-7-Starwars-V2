@@ -2,10 +2,17 @@
     margin-top: 60px !important;
 
     &-list {
-        display: grid !important;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-        gap: 20px;
+        display: flex !important;
+        flex-direction: column;
+        gap: 30px;
+        justify-content: center;
+        align-items: center;
     }
+}
+
+.card {
+    width: 400px;
+    height: 100px;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 992px) {

@@ -17,14 +17,8 @@ export class ApiStarwarsService {
 
   constructor(private http: HttpClient) { }
 
-  getShipsList(): Observable<StarshipResults> {
-    let result = this.http.get<StarshipResults>(`${environment.apiUrl}`)
-    result.pipe(
-      tap(data => console.log(data.results)
-      )
-    ).subscribe();
-    console.log(result);
-
+  getShipsList(currentPage: number): Observable<StarshipResults> {
+    let result = this.http.get<StarshipResults>(`${environment.apiUrl}${currentPage}`)
     return result
   }
 

@@ -1,0 +1,22 @@
+<main>
+    <section class="showcase">
+        <div class="showcase-slides">
+            @if(slideImgs) {
+            @for(img of slideImgs; track $index) {
+            @if($index === slide) {
+            <div class="showcase-img">
+                <img src="{{img.img}}" alt="">
+            </div>
+            }
+            }
+            }
+
+        </div>
+        <div class="showcase-btns">
+            <div class="showcase-arrow">
+                <button (click)="prevSlide()" class="showcase-prev">&#10094;</button>
+                <button (click)="nextSlide()" class="showcase-next">&#10095;</button>
+            </div>
+        </div>
+    </section>
+</main>
