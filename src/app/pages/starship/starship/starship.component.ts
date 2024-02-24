@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { ApiStarwarsService } from '../../../services/api-starwars.service';
 import { Observable } from 'rxjs';
+import { NavbarComponent } from '../../../shared/navbar/navbar.component';
 
 @Component({
   selector: 'app-starship',
   standalone: true,
-  imports: [],
+  imports: [NavbarComponent],
   templateUrl: './starship.component.html',
   styleUrl: './starship.component.scss'
 })

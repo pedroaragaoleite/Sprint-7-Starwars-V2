@@ -1,7 +1,6 @@
 .showcase {
-    position: absolute;
-    top: 0;
-    z-index: -1;
+    width: 80%;
+    margin: 0 auto;
     // height: calc(100% - 155px);
 
 
@@ -29,15 +28,45 @@
         position: absolute;
         display: flex;
         justify-content: space-between;
+        top: 70%;
+        // transform: translateY(-50%);
         width: 100%;
     }
 
     &-prev,
     &-next {
-        padding: 10px 20px !important;
+        // padding: 10px 10px !important;
         border: none;
-        background-color: transparent;
-        color: #ffffff;
-        font-size: 36px;
+        width: 50px;
+        height: 50px;
+        background-color: gray;
+        color: #000000;
+        font-size: 24px;
+        border-radius: 50%;
+        opacity: .7;
+        transition: background .5s;
+
+        &:hover {
+            background: #ffffff;
+
+        }
+    }
+}
+
+.hero {
+
+
+    &-cta {
+        // background-color: #000000;
+        padding: 50px;
+        position: absolute;
+        top: 50%;
+        left: 250px;
+        // opacity: .5;
+
+        &_text {
+            font-weight: 700;
+            text-transform: uppercase;
+        }
     }
 }

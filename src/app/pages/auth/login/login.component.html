@@ -1,1 +1,30 @@
-<p>login works!</p>
+<main>
+    <div class="login">
+        <form class="login-form d-flex flex-column justify-content-center align-items-center" [formGroup]="loginForm">
+            <div class="login-header">
+                <h4 class="login-heading text-dark">
+                    Enter your email and password
+                </h4>
+                <p class="text-dark">Log into your Star Wars account. If you don't have one, you can create
+                    one.</p>
+            </div>
+            <div class="login-body">
+                <div class="login-email">
+                    <input type="email" placeholder="Email" formControlName="email">
+                </div>
+                <div class="login-password">
+                    <input type="text" placeholder="Enter your password" formControlName="password">
+                </div>
+                <button type="submit" class="login-btn" (click)="onSubmit()">Continue</button>
+            </div>
+            <div class="login-footer">
+                <h6 class="text-dark login-footer_h6">Star Wars is part of The Walt Disney Family of Companies.</h6>
+                <p class="text-dark login-footer_p">This email and password lets you seamlessly log into services and
+                    experiences across The Walt Disney Family o Companies, such as ESPN, Walt Disney World, Marvel, and
+                    more.</p>
+                <p class="text-dark login-footer_p">If you’ve used your email with one of our services, please use it
+                    here too.</p>
+            </div>
+        </form>
+    </div>
+</main>

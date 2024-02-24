@@ -5,6 +5,7 @@ import { RegisterComponent } from './pages/auth/register/register.component';
 import { LoginComponent } from './pages/auth/login/login.component';
 import { StarshipsComponent } from './pages/starships/starships.component';
 
+
 export const routes: Routes = [
     { path: 'home', component: HomeComponent },
     { path: 'starship', component: StarshipComponent },

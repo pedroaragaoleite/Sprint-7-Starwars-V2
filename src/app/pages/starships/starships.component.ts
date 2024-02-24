@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiStarwarsService } from '../../services/api-starwars.service';
+import { NavbarComponent } from '../../shared/navbar/navbar.component';
 import { StarshipData, StarshipResults } from '../../interfaces/starship-data';
 import { RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -9,7 +10,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 @Component({
   selector: 'app-starships',
   standalone: true,
-  imports: [RouterLink, AsyncPipe, InfiniteScrollModule],
+  imports: [RouterLink, AsyncPipe, InfiniteScrollModule, NavbarComponent],
   templateUrl: './starships.component.html',
   styleUrl: './starships.component.scss'
 })

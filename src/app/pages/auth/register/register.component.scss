@@ -1,0 +1,121 @@
+.register {
+    margin: 0 auto;
+    margin-top: 60px;
+    background-color: #ffffff;
+    width: 500px;
+    border-radius: 20px;
+
+    &-heading {
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
+
+    &-form {
+        padding: 40px;
+    }
+
+    &-header>p {
+        font-size: 14px;
+        font-weight: 300;
+        margin-bottom: 20px;
+    }
+
+    &-body {
+        width: 100%;
+    }
+
+    &-firstName {
+        margin-bottom: 20px;
+
+        input {
+            padding: 16px;
+            border-radius: 10px;
+            border: none;
+            background-color: #E9E8F0;
+            font-size: 14px;
+        }
+    }
+
+    &-lastName {
+        margin-bottom: 20px;
+
+        input {
+            padding: 16px;
+            border-radius: 10px;
+            border: none;
+            background-color: #E9E8F0;
+            font-size: 14px;
+        }
+    }
+
+    &-email {
+        margin-bottom: 20px;
+
+        input {
+            padding: 16px;
+            border-radius: 10px;
+            border: none;
+            background-color: #E9E8F0;
+            font-size: 14px;
+        }
+    }
+
+    &-password {
+        margin-bottom: 20px;
+
+        input {
+            padding: 16px;
+            border-radius: 10px;
+            border: none;
+            background-color: #E9E8F0;
+            font-size: 14px;
+        }
+    }
+
+    &-password2 {
+        margin-bottom: 30px;
+
+        input {
+            padding: 16px;
+            border-radius: 10px;
+            border: none;
+            background-color: #E9E8F0;
+            font-size: 14px;
+        }
+    }
+
+    &-text {
+        font-size: 12px;
+        margin-bottom: 30px;
+    }
+
+    &-btn {
+        padding: 14px 24px;
+        background-color: #FADE4B;
+        border: #FADE4B;
+        font-weight: 700;
+        font-size: 0.875rem;
+        width: 100%;
+        border-radius: 30px;
+    }
+
+    &-footer {
+        margin-top: 20px;
+        width: 100%;
+    }
+
+
+    &-learn {
+        border: none;
+        background: transparent;
+        font-size: 12px;
+        color: blue;
+        text-align: left !important;
+    }
+}
+
+input[type='text'],
+input[type='email'] {
+    width: 100%;
+}

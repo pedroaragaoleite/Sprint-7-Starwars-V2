@@ -24,13 +24,13 @@ export class SlidesComponent {
         this.slide = this.slideImgs.length - 1;
         console.log(this.slide);
 
-      }, 1000)
+      }, 300)
 
     } else {
       setTimeout(() => {
         this.slide--;
         console.log(this.slide);
-      }, 1000)
+      }, 300)
 
     }
   }
@@ -39,12 +39,12 @@ export class SlidesComponent {
     if (this.slide === this.slideImgs.length - 1) {
       setTimeout(() => {
         this.slide = 0;
-      }, 1000)
+      }, 300)
 
     } else {
       setTimeout(() => {
         this.slide++;
-      }, 1000)
+      }, 300)
     }
 
   }

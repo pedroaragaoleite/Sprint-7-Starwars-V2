@@ -8,9 +8,9 @@ import { SlideData } from '../interfaces/slide-data';
 export class SlidesService {
 
   slideImgs: SlideData[] = [
-    { img: "../../../assets/images/Arc170-Starfighter.jpeg" },
-    { img: "../../../assets/images/Inquisitor.jpeg" },
-    { img: "../../../assets/images/dalkor-dagger.jpeg" },
+    { img: "../../../assets/images/shuttle.jpeg" },
+    { img: "../../../assets/images/maraudor.jpeg" },
+    { img: "../../../assets/images/t-85.jpeg" },
 
   ]
 
