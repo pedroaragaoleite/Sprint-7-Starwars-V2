@@ -61,10 +61,11 @@ export class AuthService {
       .pipe(
         map(res => {
           console.log(res);
-
-          localStorage.setItem('currentUser', JSON.stringify(res));
+          if (res && res.accessToken!) {
+            localStorage.setItem('currentUser', JSON.stringify(res));
+            this.currentUserSubject.next(res);
+          }
           // localStorage.setItem('userToken', res.accessToken);
-          this.currentUserSubject.next(res);
           // this.userTokenSubject.next(res.accessToken);
 
           return res;
@@ -73,7 +74,9 @@ export class AuthService {
   }
 
   checkEmail(email: string): Observable<boolean> {
-    return this.http.get<User[]>(`${url}users?email=${email}`, httpOptions)
+    console.log(email);
+
+    return this.http.get<User[]>(`${url}/users?email=${email}`)
       .pipe(
         map(users => users.length > 0)
       )

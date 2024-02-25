@@ -30,37 +30,63 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void {
+    // this.isSubmitted = true;
+
+    // if (this.loginForm.valid) {
+    //   // const user: User = {
+    //   //   user.email: this.loginForm.value.email as string,
+    //   //   password: this.loginForm.value.password as string,
+    //   // }
+    //   // console.log(email, password);
+    //   let data = this.loginForm.value;
+
+
+    //   this.authService.login(JSON.stringify(data))
+    //     .subscribe({
+    //       next: (res: any) => {
+    //         console.log(res);
+    //         console.log(this.authService.checkEmail(res.email));
+
+    //         if (res.password === data.password) {
+
+    //           this.router.navigate(['/starships'])
+    //         } else {
+    //           console.log("no email");
+
+    //         }
+    //       },
+    //       error: error => {
+    //         console.error('login invalido', error);
+
+    //       }
+    //     })
+    // }
+
     this.isSubmitted = true;
 
     if (this.loginForm.valid) {
-      // const user: User = {
-      //   user.email: this.loginForm.value.email as string,
-      //   password: this.loginForm.value.password as string,
-      // }
-      // console.log(email, password);
       let data = this.loginForm.value;
-
 
       this.authService.login(JSON.stringify(data))
         .subscribe({
           next: (res: any) => {
             console.log(res);
-            console.log(this.authService.checkEmail(res.email));
 
-            if (res.password === data.password) {
-
-              this.router.navigate(['/starships'])
+            if (res.accessToken!) {
+              localStorage.setItem('userToken', res.accessToken);
+              this.router.navigate(['/starships']);
             } else {
-              console.log("no email");
-
+              console.error('Error en el login: No se recibió el token.');
             }
           },
           error: error => {
-            console.error('login invalido', error);
-
+            console.error('Login inválido', error);
           }
-        })
+        });
+    } else {
+      console.log("Formulario no válido");
     }
+
 
   }
 
