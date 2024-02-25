@@ -37,31 +37,32 @@ export class RegisterComponent implements OnInit {
 
 
     if (this.registerForm.valid) {
-      const user: User = {
-        firstName: this.registerForm.value.firstName as string,
-        lastName: this.registerForm.value.lastName as string,
-        email: this.registerForm.value.email as string,
-        password: this.registerForm.value.password as string
-      };
+      // const user: User = {
+      //   firstName: this.registerForm.value.firstName as string,
+      //   lastName: this.registerForm.value.lastName as string,
+      //   email: this.registerForm.value.email as string,
+      //   password: this.registerForm.value.password as string
+      // };
 
-      if (this.registerForm.value.password === this.registerForm.value.password2) {
-        this.authService.register(user)
-          .subscribe({
-            next: (response: any) => {
-              console.log(response);
-
-              // localStorage.setItem('token', response.accessToken);
-              this.router.navigate(['/login']);
-            },
-            error: error => {
-              console.error('Error durante el registro')
-            }
-          })
-      }
-    } else {
-      console.error('las contraseñas no coinciden');
-      console.log(this.registerForm.value.password);
-      console.log(this.registerForm.value.password2);
+      //   if (this.registerForm.value.password === this.registerForm.value.password2) {
+      //     this.authService.register(user)
+      //       .subscribe({
+      //         next: (response: any) => {
+      //           console.log(response);
+      //           localStorage.setItem('currentUser', JSON.stringify(user));
+      //           localStorage.setItem('userToken', user.accessToken as string);
+      //           // localStorage.setItem('token', response.accessToken);
+      //           this.router.navigate(['/login']);
+      //         },
+      //         error: error => {
+      //           console.error('Error durante el registro')
+      //         }
+      //       })
+      //   }
+      // } else {
+      //   console.error('las contraseñas no coinciden');
+      //   console.log(this.registerForm.value.password);
+      //   console.log(this.registerForm.value.password2);
 
 
     }

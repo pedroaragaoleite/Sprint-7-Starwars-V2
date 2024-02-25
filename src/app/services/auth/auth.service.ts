@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders, HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs';
@@ -28,6 +28,7 @@ export class AuthService {
   constructor(private http: HttpClient) {
     this.currentUserSubject = new BehaviorSubject<User | null>(JSON.parse(localStorage.getItem('currentUser') || 'null'));
     this.currentUser = this.currentUserSubject.asObservable();
+
   }
 
   public get currentUserValue(): User | null {
@@ -36,25 +37,57 @@ export class AuthService {
 
 
   register(user: User): Observable<User> {
-    return this.http.post<User>(`${url}/users`, user, httpOptions);
-  }
 
-  login(email: string, password: string): Observable<any> {
-    return this.http.post<any>(`${url}/users`, { email, password }, httpOptions)
+    return this.http.post<User>(`${url}/users`, user, httpOptions)
       .pipe(
         map(user => {
-          if (user && user.token) {
+          if (user && user.accessToken) {
             localStorage.setItem('currentUser', JSON.stringify(user));
-            localStorage.setItem('userToken', user.token);
+            localStorage.setItem('userToken', user.accessToken);
             this.currentUserSubject.next(user);
-            this.userTokenSubject.next(user.token);
+            this.userTokenSubject.next(user.accessToken);
           } else {
             console.error('Token no recibido del backend');
           }
+          console.log(this.userToken);
+
           return user;
         })
       )
   }
+
+  login(data: string): Observable<User> {
+    return this.http.post<User>(`${url}/users`, data, httpOptions)
+      .pipe(
+        map(res => {
+          console.log(res);
+
+          localStorage.setItem('currentUser', JSON.stringify(res));
+          // localStorage.setItem('userToken', res.accessToken);
+          this.currentUserSubject.next(res);
+          // this.userTokenSubject.next(res.accessToken);
+
+          return res;
+        })
+      );
+  }
+
+  checkEmail(email: string): Observable<boolean> {
+    return this.http.get<User[]>(`${url}users?email=${email}`, httpOptions)
+      .pipe(
+        map(users => users.length > 0)
+      )
+  }
+
+  // login(user: User): Observable<User> {
+  //   return this.http.post<User>(`${url}users`, user, httpOptions)
+  //     .pipe(
+  //       map(res => {
+  //         console.log(res);
+  //         return res;
+  //       })
+  //     )
+  // }
 
   logout() {
     // Remueve el usuario y el token del almacenamiento local

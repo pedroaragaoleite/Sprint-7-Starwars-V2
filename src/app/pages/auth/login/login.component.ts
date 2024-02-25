@@ -31,22 +31,29 @@ export class LoginComponent implements OnInit {
 
   onSubmit(): void {
     this.isSubmitted = true;
+
     if (this.loginForm.valid) {
-      const { email, password } = this.loginForm.value
-      console.log(email, password);
-
-      this.authService.userToken.subscribe({
-        next: (res: any) => {
-          localStorage.setItem('userToken', JSON.stringify(res));
-        }
-      })
+      // const user: User = {
+      //   user.email: this.loginForm.value.email as string,
+      //   password: this.loginForm.value.password as string,
+      // }
+      // console.log(email, password);
+      let data = this.loginForm.value;
 
 
-      this.authService.login(email as string, password as string)
+      this.authService.login(JSON.stringify(data))
         .subscribe({
           next: (res: any) => {
-            localStorage.setItem('currentUser', JSON.stringify(res));
-            this.router.navigate(['/starships'])
+            console.log(res);
+            console.log(this.authService.checkEmail(res.email));
+
+            if (res.password === data.password) {
+
+              this.router.navigate(['/starships'])
+            } else {
+              console.log("no email");
+
+            }
           },
           error: error => {
             console.error('login invalido', error);
