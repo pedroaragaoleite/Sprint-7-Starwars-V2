@@ -40,6 +40,7 @@ export class AuthService {
 
   register(user: User): Observable<User> {
     user.password = bcrypt.hashSync(user.password as string, 12);
+    user.accessToken = "Fake token"
 
     return this.http.post<User>(`${url}/users`, user, httpOptions)
       .pipe(
@@ -63,6 +64,7 @@ export class AuthService {
     return this.http.post<User>(`${url}/users`, data, httpOptions)
       .pipe(
         map(res => {
+          res.accessToken = "Fake token"
           console.log(res);
           if (res && res.accessToken!) {
             localStorage.setItem('currentUser', JSON.stringify(res));
