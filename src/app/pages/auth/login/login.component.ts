@@ -65,9 +65,12 @@ export class LoginComponent implements OnInit {
     this.isSubmitted = true;
 
     if (this.loginForm.valid) {
-      let data = this.loginForm.value;
+      let data = {...this.loginForm.value};
 
-      this.authService.login(JSON.stringify(data))
+      this.authService.checkEmail(data.email as string)
+      .subscribe(emailExists => {
+        if(emailExists) {
+      this.authService.login(data as string)
         .subscribe({
           next: (res: any) => {
             console.log(res);
@@ -83,6 +86,13 @@ export class LoginComponent implements OnInit {
             console.error('Login inválido', error);
           }
         });
+        } else {
+          console.log("Account or password invalid");
+          
+        }
+      })
+
+
     } else {
       console.log("Formulario no válido");
     }
