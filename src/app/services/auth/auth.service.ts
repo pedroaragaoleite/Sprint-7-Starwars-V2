@@ -4,6 +4,8 @@ import { environment } from '../../../environments/environment';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs';
 import { User } from '../../interfaces/user';
+import * as bcrypt from 'bcryptjs';
+
 
 const url = environment.apiBack;
 const httpOptions = {
@@ -37,6 +39,7 @@ export class AuthService {
 
 
   register(user: User): Observable<User> {
+    user.password = bcrypt.hashSync(user.password as string, 12);
 
     return this.http.post<User>(`${url}/users`, user, httpOptions)
       .pipe(

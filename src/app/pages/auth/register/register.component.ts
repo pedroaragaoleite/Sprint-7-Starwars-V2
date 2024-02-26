@@ -46,8 +46,8 @@ export class RegisterComponent implements OnInit {
 
       console.log(this.registerForm.value.password2);
 
-      if (this.registerForm.value.password === this.registerForm.value.password2) {
-        this.authService.checkEmail(user.email!)
+      if (user.password === this.registerForm.value.password2) {
+        this.authService.checkEmail(user.email as string)
           .subscribe(emailExists => {
             if (!emailExists) {
               this.authService.register(user)

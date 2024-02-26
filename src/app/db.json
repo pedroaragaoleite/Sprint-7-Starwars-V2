@@ -8,34 +8,11 @@
       "id": "3dd5"
     },
     {
-      "id": "27e3",
-      "email": "pedro@gmail.com",
-      "password": "123456"
-    },
-    {
-      "id": "fe30",
+      "id": "d986",
+      "firstName": "Pedro",
+      "lastName": "Aragão",
       "email": "pedro.aragao.leite@gmail.com",
-      "password": "123456"
-    },
-    {
-      "id": "51ad",
-      "email": "pedro.aragao.leite@gmail.com",
-      "password": "123456"
-    },
-    {
-      "id": "6212",
-      "email": "pedro.aragao.leite@gmail.com",
-      "password": "123456"
-    },
-    {
-      "id": "55e9",
-      "email": "pedro.aragao.leite@gmail.com",
-      "password": "123456"
-    },
-    {
-      "id": "207c",
-      "email": "pedro.aragao.leite@gmail.com",
-      "password": "123456"
+      "password": "$2a$12$RXKE3imeiW3HQpaHJsm9pOILQMlbU0ohNSIsZdfTDG0NS38snizdq"
     }
   ]
 }
