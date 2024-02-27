@@ -6,11 +6,14 @@ import { RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { PilotsComponent } from '../../components/pilots/pilots.component';
+import { MoviesComponent } from '../../components/movies/movies.component';
+MoviesComponent
 
 @Component({
   selector: 'app-starships',
   standalone: true,
-  imports: [RouterLink, AsyncPipe, InfiniteScrollModule, NavbarComponent],
+  imports: [RouterLink, AsyncPipe, InfiniteScrollModule, NavbarComponent, MoviesComponent, PilotsComponent],
   templateUrl: './starships.component.html',
   styleUrl: './starships.component.scss'
 })
@@ -42,6 +45,7 @@ export class StarshipsComponent {
     const id = shipIdMatch[1]
     this.apiservice.getShip(ship, id);
     this.apiservice.getFilms(ship, id)
+    this.apiservice.getPilots(ship, id)
     // this.apiservice.getFilms(ship);
   }
 

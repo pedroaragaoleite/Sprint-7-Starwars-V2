@@ -34,22 +34,10 @@
         </div>
     </div>
 </div>
+<app-pilots></app-pilots>
+<app-movies></app-movies>
+}
 
-@if(filmsArray) {
-    <div class="container-xl pilots">
-    <div class="pilots-title">
-        <h4 class="font-bold border-bottom border-secondary">PILOTS</h4>
-    </div>
-    <div class="pilots-card">
-        @for( img of filmsArray; track $index) {
-        <div class="shipdetails-img">
-            <img src="{{img}}" alt="Starship">
-        </div>    
-        }
-        
-    </div>
-</div>
-}
-}
+
 
 

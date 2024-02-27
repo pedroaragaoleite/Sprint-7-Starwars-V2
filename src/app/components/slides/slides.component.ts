@@ -14,7 +14,7 @@ export class SlidesComponent {
   slide: number = 0;
 
   ngOnInit(): void {
-    console.log(this.slideImgs);
+    // console.log(this.slideImgs);
 
   }
 

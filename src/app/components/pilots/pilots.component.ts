@@ -1,0 +1,23 @@
+import { Component, OnInit } from '@angular/core';
+import { StarshipComponent } from '../../pages/starship/starship/starship.component';
+import { ApiStarwarsService } from '../../services/api-starwars.service';
+
+@Component({
+  selector: 'app-pilots',
+  standalone: true,
+  imports: [StarshipComponent],
+  templateUrl: './pilots.component.html',
+  styleUrl: './pilots.component.scss'
+})
+export class PilotsComponent implements OnInit {
+  pilotsArray: string[] = [];
+
+  constructor(private apiservice: ApiStarwarsService) {}
+
+  ngOnInit(): void {
+    this.apiservice.currentPilotUrl.subscribe(url => {
+      this.pilotsArray = url;
+    })
+  }
+  
+}
