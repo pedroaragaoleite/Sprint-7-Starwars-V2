@@ -30,73 +30,75 @@ export class ApiStarwarsService {
 
   // recibe el ship del component
   getShip(ship: any, id: number) {
-    this.getShipImage(id); 
+    this.getShipImage(id);
     this.shipSource.next(ship);
     // console.log(ship.films);
-    
+
   }
 
-  getFilms(ship: any, id: number) {
-    let shipArray:any = [];   
-    ship.films.forEach((film:any) => {
+  getFilms(ship: any) {
+    let shipArray: any = [];
+    ship.films.forEach((film: any) => {
       let filmId = film.match(/\/(\d+)\/$/);
-      shipArray.push(filmId[1]);     } )
+      shipArray.push(filmId[1]);
+    })
     this.getFilmsImage(shipArray);
   }
 
-  getPilots(ship: any, id: number) {
-    let shipArray:any = [];   
-    ship.pilots.forEach((pilot:any) => {
-      // console.log(pilot);
-      
+  getPilots(ship: any) {
+    let pilotsId: any = [];
+    ship.pilots.forEach((pilot: any) => {
       let pilotId = pilot.match(/\/(\d+)\/$/);
-      shipArray.push(pilotId[1]);     } )
-    this.getPilotsImage(shipArray);
+      pilotsId.push(pilotId[1]);
+    });
+    console.log(pilotsId);
+
+    this.getPilotsImage(pilotsId);
 
     this.resetPilotImages();
   }
 
-  resetPilotImages () {
+  resetPilotImages() {
     this.pilotImagesUrl.next([]);
   }
 
-  getPilotsImage(shipArray:any) {
-    shipArray.forEach((element:number) => {
-      this.http.get(`${environment.apiImg}/characters/${element}.jpg`, {responseType: 'blob' })
-    .pipe(
-      map(blob => URL.createObjectURL(blob)),
-      catchError(error => {
-        console.error('La imagen no existe en la Api');
-        return of('../../../assets/images/image-not-found.png');
-      })
-    )
-    .subscribe(pilotUrl => {
-      let pilotsArray = [...this.pilotImagesUrl.value, pilotUrl]
-      // console.log(pilotsArray);
-      
-      this.pilotImagesUrl.next(pilotsArray);
-    });
+  getPilotsImage(pilotsId: any) {
+    pilotsId.forEach((element: number) => {
+      this.http.get(`${environment.apiImg}/characters/${element}.jpg`, { responseType: 'blob' })
+        .pipe(
+          map(blob => URL.createObjectURL(blob)),
+          catchError(error => {
+            console.error('La imagen no existe en la Api');
+            return of('../../../assets/images/image-not-found.png');
+          })
+        )
+        .subscribe(pilotUrl => {
+          let pilotsArray = [...this.pilotImagesUrl.value, pilotUrl]
+          // console.log(pilotsArray);
+
+          this.pilotImagesUrl.next(pilotsArray);
+        });
     })
   }
 
-  getFilmsImage(shipArray:any) {   
-    shipArray.forEach((element:number) => {
-      this.http.get(`${environment.apiImg}/films/${element}.jpg`, {responseType: 'blob' })
-    .pipe(
-      map(blob => URL.createObjectURL(blob)),
-      catchError(error => {
-        console.error('La imagen no existe en la Api');
-        return of('../../../assets/images/image-not-found.png');
-      })
-    )
-    .subscribe(filmUrl => {
-      const filmsArray = [...this.filmImagesUrl.value, filmUrl]
-      // console.log(filmsArray);
-      
-      this.filmImagesUrl.next(filmsArray);
-    });
-    }) 
-    
+  getFilmsImage(shipArray: any) {
+    shipArray.forEach((element: number) => {
+      this.http.get(`${environment.apiImg}/films/${element}.jpg`, { responseType: 'blob' })
+        .pipe(
+          map(blob => URL.createObjectURL(blob)),
+          catchError(error => {
+            console.error('La imagen no existe en la Api');
+            return of('../../../assets/images/image-not-found.png');
+          })
+        )
+        .subscribe(filmUrl => {
+          const filmsArray = [...this.filmImagesUrl.value, filmUrl]
+          // console.log(filmsArray);
+
+          this.filmImagesUrl.next(filmsArray);
+        });
+    })
+
   }
 
 

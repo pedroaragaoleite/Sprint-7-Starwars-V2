@@ -69,9 +69,11 @@ export class AuthService {
           if (res && res.accessToken!) {
             localStorage.setItem('currentUser', JSON.stringify(res));
             this.currentUserSubject.next(res);
+            localStorage.setItem('userToken', res.accessToken);
+            this.userTokenSubject.next(res.accessToken);
+
+
           }
-          // localStorage.setItem('userToken', res.accessToken);
-          // this.userTokenSubject.next(res.accessToken);
 
           return res;
         })
@@ -87,15 +89,6 @@ export class AuthService {
       )
   }
 
-  // login(user: User): Observable<User> {
-  //   return this.http.post<User>(`${url}users`, user, httpOptions)
-  //     .pipe(
-  //       map(res => {
-  //         console.log(res);
-  //         return res;
-  //       })
-  //     )
-  // }
 
   logout() {
     // Remueve el usuario y el token del almacenamiento local
