@@ -1,0 +1,33 @@
+{
+  "users": [
+    {
+      "firstName": "Pedro",
+      "lastName": "Aragao",
+      "email": "pedro@gmail.com",
+      "password": "123456",
+      "id": "3dd5"
+    },
+    {
+      "id": "d986",
+      "firstName": "Pedro",
+      "lastName": "Aragão",
+      "email": "pedro.aragao.leite@gmail.com",
+      "password": "$2a$12$RXKE3imeiW3HQpaHJsm9pOILQMlbU0ohNSIsZdfTDG0NS38snizdq"
+    },
+    {
+      "id": "f31c",
+      "email": "pedro@gmail.com",
+      "password": "123456"
+    },
+    {
+      "id": "c3f7",
+      "email": "pedro@gmail.com",
+      "password": "123456"
+    },
+    {
+      "id": "dbd4",
+      "email": "pedro@gmail.com",
+      "password": "123456"
+    }
+  ]
+}
