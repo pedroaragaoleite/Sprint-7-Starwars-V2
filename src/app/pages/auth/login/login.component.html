@@ -11,9 +11,24 @@
             <div class="login-body">
                 <div class="login-email">
                     <input type="email" placeholder="Email" formControlName="email">
+                        @if((loginForm.get('email')?.touched || loginForm.get('email')?.dirty || isSubmitted) &&
+                        loginForm.get('email')?.errors) {
+                        @if(loginForm.get('email')?.errors?.['required']) {
+                        <p class="contact-invalid input-validation services-invalid">L'email és necesari</p>
+                        }
+                        @if(loginForm.get('email')?.hasError('emailInvalid') &&
+                        !loginForm.get('email')?.errors?.['required']) {
+                        <p class="contact-invalid input-validation services-invalid">L'email és invalid</p>
+                        }
+                        }
                 </div>
                 <div class="login-password">
                     <input type="text" placeholder="Enter your password" formControlName="password">
+                    @if((loginForm.get('password')?.touched || loginForm.get('password')?.dirty || isSubmitted) &&
+                    loginForm.get('password')?.errors) {
+                        <p class="contact-invalid input-validation services-invalid">Password invalida</p>
+
+                    }
                 </div>
                 <button type="submit" class="login-btn" (click)="onSubmit()">Continue</button>
             </div>

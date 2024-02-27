@@ -13,9 +13,14 @@ import { NavbarComponent } from '../../../shared/navbar/navbar.component';
 export class StarshipComponent {
   ship: any;
   imgUrl: string | null = null;
+  filmsArray: string[] = [];
 
 
-  constructor(private apiservice: ApiStarwarsService) { }
+  constructor(private apiservice: ApiStarwarsService) { 
+
+    // console.log(this.filmsArray);
+    
+  }
 
   ngOnInit(): void {
     this.apiservice.currentShip.subscribe(ship => {
@@ -25,5 +30,10 @@ export class StarshipComponent {
     this.apiservice.currentShipUrl.subscribe(url => {
       this.imgUrl = url;
     })
+    this.apiservice.currentFilmUrl.subscribe(url => {
+      this.filmsArray = url;
+    })
   }
+
+  
 }

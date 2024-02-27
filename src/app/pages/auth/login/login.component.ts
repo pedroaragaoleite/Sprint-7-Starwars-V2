@@ -3,6 +3,8 @@ import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../../services/auth/auth.service';
 import { Router } from '@angular/router';
 import { User } from '../../../interfaces/user';
+import { emailValidator } from '../../../validators/customValidator';
+
 
 @Component({
   selector: 'app-login',
@@ -16,8 +18,8 @@ export class LoginComponent implements OnInit {
 
 
   loginForm = this.fb.group({
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required]]
+    email: ['', [Validators.required, Validators.email, emailValidator()]],
+    password: ['', [Validators.required,Validators.minLength(6)]]
   })
 
 
@@ -30,7 +32,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void {
-    // this.isSubmitted = true;
+    this.isSubmitted = true;
 
     // if (this.loginForm.valid) {
     //   // const user: User = {
@@ -62,7 +64,7 @@ export class LoginComponent implements OnInit {
     //     })
     // }
 
-    this.isSubmitted = true;
+    // this.isSubmitted = true;
 
     if (this.loginForm.valid) {
       let data = {...this.loginForm.value};

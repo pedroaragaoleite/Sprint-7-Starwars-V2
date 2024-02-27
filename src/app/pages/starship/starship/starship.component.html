@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
 
 @if(ship) {
-<div class="container-fluid shipdetails">
+<div class="container-xl shipdetails">
     <div class="shipdetails-title">
         <h4 class="font-bold border-bottom border-secondary">STARSHIP</h4>
     </div>
@@ -34,6 +34,22 @@
         </div>
     </div>
 </div>
-} @else {
-<p>no ship in the area</p>
+
+@if(filmsArray) {
+    <div class="container-xl pilots">
+    <div class="pilots-title">
+        <h4 class="font-bold border-bottom border-secondary">PILOTS</h4>
+    </div>
+    <div class="pilots-card">
+        @for( img of filmsArray; track $index) {
+        <div class="shipdetails-img">
+            <img src="{{img}}" alt="Starship">
+        </div>    
+        }
+        
+    </div>
+</div>
 }
+}
+
+

@@ -19,7 +19,7 @@
         grid-row-gap: 0px;
         border-radius: 20px !important;
         width: 100%;
-        height: 250px;
+        max-height: 250px;
     }
 
     &-details {
@@ -29,7 +29,8 @@
     }
 
     &-img img {
-        width: 100%;
+        width:100%;
+        max-width:600px;
         height: 100%;
         object-fit: cover;
     }
@@ -55,4 +56,27 @@
     &-details {
         padding: 10px;
     }
+}
+
+.pilots {
+    margin-top: 20px;
+    &-title {
+        border-top:1px solid gray ;
+        border-bottom:1px solid gray ;
+    }
+    &-title h4 {
+        padding-bottom: 8px;
+        font-size: 24px !important;
+        color: #ffffff !important;
+        // border-top: 1 px solid gray;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .shipdetails {
+        &-card {
+            grid-template-columns: 1fr;
+            max-height: none;
+        }
+    }  
 }

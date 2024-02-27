@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { StarshipResults } from '../interfaces/starship-data';
 import { HttpClient, HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { Observable, of, map, tap, catchError, BehaviorSubject } from 'rxjs';
+import { Observable, of, map, tap, catchError, BehaviorSubject, elementAt } from 'rxjs';
 
 
 @Injectable({
@@ -15,6 +15,9 @@ export class ApiStarwarsService {
   private shipImageUrl = new BehaviorSubject<string | null>(null);
   currentShipUrl = this.shipImageUrl.asObservable();
 
+  private filmImagesUrl = new BehaviorSubject<string[]>([]);
+  currentFilmUrl = this.filmImagesUrl.asObservable();
+
   constructor(private http: HttpClient) { }
 
   getShipsList(currentPage: number): Observable<StarshipResults> {
@@ -23,14 +26,47 @@ export class ApiStarwarsService {
   }
 
   // recibe el ship del component
-  getShip(ship: any) {
-    // isoloamos los numeros despues de la /
-    const shipIdMatch = ship.url.match(/\/(\d+)\/$/);
-    // console.log(shipIdMatch[1]);
-    // enviamos el id a la funcion getShipImage
-    this.getShipImage(shipIdMatch[1]);
+  getShip(ship: any, id: number) {
+    this.getShipImage(id); 
     this.shipSource.next(ship);
+    // console.log(ship.films);
+    
   }
+
+  getFilms(ship: any, id: number) {
+    let shipArray:any = [];
+    console.log(ship.films);
+    
+    ship.films.forEach((film:any) => {
+      let filmId = film.match(/\/(\d+)\/$/);
+      shipArray.push(filmId[1]); 
+    } )
+    this.getFilmsImage(shipArray);
+    console.log(id);
+    
+
+  }
+
+  getFilmsImage(shipArray:any) {   
+    shipArray.forEach((element:number) => {
+      this.http.get(`${environment.apiImg}/films/${element}.jpg`, {responseType: 'blob' })
+    .pipe(
+      map(blob => URL.createObjectURL(blob)),
+      catchError(error => {
+        console.error('La imagen no existe en la Api');
+        return of('../../../assets/images/image-not-found.png');
+      })
+    )
+    .subscribe(filmUrl => {
+      const filmsArray = [...this.filmImagesUrl.value, filmUrl]
+      console.log(filmsArray);
+      
+      this.filmImagesUrl.next(filmsArray);
+    });
+    }) 
+    
+  }
+
 
 
   getShipImage(id: number) {

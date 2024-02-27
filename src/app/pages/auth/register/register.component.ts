@@ -4,6 +4,8 @@ import { AuthService } from '../../../services/auth/auth.service';
 import { Observable } from 'rxjs';
 import { User } from '../../../interfaces/user';
 import { Router } from '@angular/router';
+import { emailValidator } from '../../../validators/customValidator';
+
 
 
 @Component({
@@ -21,7 +23,7 @@ export class RegisterComponent implements OnInit {
     lastName: ['', [Validators.required, Validators.minLength(3)]],
     password: ['', [Validators.required, Validators.min(6)]],
     password2: ['', [Validators.required, Validators.min(6)]],
-    email: ['', [Validators.required, Validators.email]]
+    email: ['', [Validators.required, Validators.email, emailValidator()]]
   })
 
 

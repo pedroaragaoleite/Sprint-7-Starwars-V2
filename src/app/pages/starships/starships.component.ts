@@ -33,14 +33,16 @@ export class StarshipsComponent {
         this.starshipResults = response.results;
         // console.log(this.starshipResults);
       })
-
-
   }
 
   // del evento click envia el objecto ship e envia al service para
   // retirar el id de la url
   showShip(ship: any) {
-    this.apiservice.getShip(ship)
+    const shipIdMatch = ship.url.match(/\/(\d+)\/$/);
+    const id = shipIdMatch[1]
+    this.apiservice.getShip(ship, id);
+    this.apiservice.getFilms(ship, id)
+    // this.apiservice.getFilms(ship);
   }
 
   onScrollDown() {
