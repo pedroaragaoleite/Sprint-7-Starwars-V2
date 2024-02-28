@@ -1,5 +1,5 @@
 @if(filmsArray) {
-    <div class="container-xl pilots">
+<div class="container-xl pilots">
     <div class="pilots-title">
         <h4 class="font-bold border-bottom border-secondary">FILMS</h4>
     </div>
@@ -7,10 +7,10 @@
         @for( img of filmsArray; track $index) {
         <div class="shipdetails-img">
             <img src="{{img}}" alt="Starship">
-        </div>    
+            <p>{{movieNames[$index]}}</p>
+        </div>
         }
-        
+
     </div>
 </div>
 }
-

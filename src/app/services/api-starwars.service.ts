@@ -2,8 +2,10 @@ import { Injectable } from '@angular/core';
 import { StarshipResults } from '../interfaces/starship-data';
 import { HttpClient, HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { Observable, of, map, tap, catchError, BehaviorSubject, elementAt } from 'rxjs';
+import { Observable, of, map, tap, catchError, BehaviorSubject, elementAt, forkJoin } from 'rxjs';
 
+const apiStarWars = (`https://swapi.dev/api`);
+const apiImages = (`https://starwars-visualguide.com/assets/img`);
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +26,18 @@ export class ApiStarwarsService {
   private pilotNamesUrl = new BehaviorSubject<string[]>([]);
   currentPilotNameUrl = this.pilotNamesUrl.asObservable();
 
+  private movieNamesUrl = new BehaviorSubject<string[]>([]);
+  currentMovieNameUrl = this.movieNamesUrl.asObservable();
+
   constructor(private http: HttpClient) { }
+
+
+  //Function generica para hacer fetch
+  private fetchData<T>(url: string): Observable<T> {
+    // console.log(url);
+
+    return this.http.get<T>(url)
+  }
 
   getShipsList(currentPage: number): Observable<StarshipResults> {
     let result = this.http.get<StarshipResults>(`${environment.apiUrl}${currentPage}`)
@@ -33,57 +46,68 @@ export class ApiStarwarsService {
 
   // recibe el ship del component
   getShip(ship: any, id: number) {
+    this.resetArrays();
     this.getShipImage(id);
     this.shipSource.next(ship);
+
+    this.getUrlsIds(ship, "pilots")
+    this.getUrlsIds(ship, "films")
+    // this.getImagesId(ship, "pilots")
+    // this.getImagesId(ship, "films")
     // console.log(ship.films);
-
   }
 
-  getFilms(ship: any) {
-    let shipArray: any = [];
-    ship.films.forEach((film: any) => {
-      let filmId = film.match(/\/(\d+)\/$/);
-      shipArray.push(filmId[1]);
-    })
-    this.getFilmsImage(shipArray);
-  }
-
-  getPilots(ship: any) {
-    let pilotsId: any = [];
-    ship.pilots.forEach((pilot: any) => {
-      let pilotId = pilot.match(/\/(\d+)\/$/);
-      pilotsId.push(pilotId[1]);
+  getUrlsIds(ship: any, type: "pilots" | "films") {
+    let urlsId: any = [];
+    ship[type].forEach((element: any) => {
+      let urlId = element.match(/\/(\d+)\/$/);
+      urlsId.push(urlId[1]);
     });
-    console.log(pilotsId);
-    this.getPilotsNames(pilotsId);
-    this.getPilotsImage(pilotsId);
-
-    this.resetArrays();
+    console.log(urlsId);
+    this.fetchNames(urlsId, type)
+    this.fetchImages(urlsId, type)
   }
 
-  getPilotsNames(pilotsId: any) {
-    pilotsId.forEach((element: number) => {
-      console.log(element);
-      
-      this.http.get(`https://swapi.dev/api/people/${element}`)
-      .subscribe((pilotName: any) => {
-        let pilotNames = pilotName.name;
-        let pilotNameArray = [...this.pilotNamesUrl.value, pilotNames];
-        console.log(pilotNameArray);     
-        this.pilotNamesUrl.next(pilotNameArray)
-           
-      })
-    })
+  // getImagesId(ship: any, type: "pilots" | "films") {
+  //   let urlsId: any = [];
+  //   console.log(ship);
+
+  //   ship[type].forEach((element: any) => {
+  //     let urlId = element.match(/\/(\d+)\/$/);
+  //     urlsId.push(urlId[1]);
+  //   });
+  //   console.log(urlsId);
+  //   this.fetchImages(urlsId, type)
+  // }
+
+  private fetchNames(urls: string[], type: 'pilots' | 'films'): void {
+
+    const endpoints = type === 'pilots' ? 'people' : type;
+
+    const requests = urls.map(url => this.fetchData<any>(`${apiStarWars}/${endpoints}/${url}`)
+      .pipe(
+        map(response => type === 'pilots' ? response.name : response.title)));
+
+    forkJoin(requests).subscribe(
+      namesArray => {
+        if (type === 'pilots') {
+          console.log(namesArray);
+
+          this.pilotNamesUrl.next(namesArray)
+        } else {
+          console.log(namesArray);
+
+          this.movieNamesUrl.next(namesArray)
+        }
+      },
+      error => console.error('Error fetching data', error)
+    )
   }
 
-  resetArrays() {
-    this.pilotImagesUrl.next([]);
-    this.pilotNamesUrl.next([]);
-  }
-
-  getPilotsImage(pilotsId: any) {
-    pilotsId.forEach((element: number) => {
-      this.http.get(`${environment.apiImg}/characters/${element}.jpg`, { responseType: 'blob' })
+  private fetchImages(urls: string[], type: "pilots" | "films") {
+    const endpoints = type === 'pilots' ? 'characters' : type;
+    urls.forEach((id: any) => {
+      this.http.get(`${environment.apiImg}/${endpoints}/${id}.jpg`, { responseType: 'blob' })
         .pipe(
           map(blob => URL.createObjectURL(blob)),
           catchError(error => {
@@ -91,36 +115,23 @@ export class ApiStarwarsService {
             return of('../../../assets/images/image-not-found.png');
           })
         )
-        .subscribe(pilotUrl => {
-          let pilotsArray = [...this.pilotImagesUrl.value, pilotUrl]
-          // console.log(pilotsArray);
+        .subscribe(url => {
+          let imagesArray;
+          if (type === 'pilots') {
+            imagesArray = [...this.pilotImagesUrl.value, url];
+            this.pilotImagesUrl.next(imagesArray);
+            console.log(imagesArray);
 
-          this.pilotImagesUrl.next(pilotsArray);
+          } else if (type === 'films') {
+            imagesArray = [...this.filmImagesUrl.value, url];
+            console.log(imagesArray);
+
+            this.filmImagesUrl.next(imagesArray);
+          }
+          // console.log(imagesArray);
         });
-    })
+    });
   }
-
-  getFilmsImage(shipArray: any) {
-    shipArray.forEach((element: number) => {
-      this.http.get(`${environment.apiImg}/films/${element}.jpg`, { responseType: 'blob' })
-        .pipe(
-          map(blob => URL.createObjectURL(blob)),
-          catchError(error => {
-            console.error('La imagen no existe en la Api');
-            return of('../../../assets/images/image-not-found.png');
-          })
-        )
-        .subscribe(filmUrl => {
-          const filmsArray = [...this.filmImagesUrl.value, filmUrl]
-          // console.log(filmsArray);
-
-          this.filmImagesUrl.next(filmsArray);
-        });
-    })
-
-  }
-
-
 
   getShipImage(id: number) {
     //recebimos el id y vamos sacar la imagen de otra api con ese ID
@@ -136,6 +147,15 @@ export class ApiStarwarsService {
         this.shipImageUrl.next(imgUrl);
       });
   }
+
+
+  resetArrays() {
+    this.pilotImagesUrl.next([]);
+    this.pilotNamesUrl.next([]);
+    this.movieNamesUrl.next([]);
+    this.filmImagesUrl.next([]);
+  }
+
 
 
 }

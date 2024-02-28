@@ -27,6 +27,13 @@
       "firstName": "Pedro",
       "lastName": "Aragao",
       "id": "01giGLv"
+    },
+    {
+      "email": "teste@gmail.com",
+      "password": "$2a$10$thYWrP8LmJ.S56TkQ81ece2IVVJ/48tNfZHJK8iIzdKi1I9BpZ3Re",
+      "firstName": "Pedro",
+      "lastName": "Aragão",
+      "id": "744jKdt"
     }
   ]
 }

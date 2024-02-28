@@ -11,14 +11,18 @@ import { ApiStarwarsService } from '../../services/api-starwars.service';
   styleUrl: './movies.component.scss'
 })
 export class MoviesComponent implements OnInit {
-  filmsArray:string[] = [];
+  filmsArray: string[] = [];
+  movieNames: string[] = [];
 
-  constructor(private apiservice: ApiStarwarsService ) {}
+  constructor(private apiservice: ApiStarwarsService) { }
 
   ngOnInit(): void {
-        this.apiservice.currentFilmUrl.subscribe(url => {
-    this.filmsArray = url;
-  })
+    this.apiservice.currentFilmUrl.subscribe(url => {
+      this.filmsArray = url;
+    })
+    this.apiservice.currentMovieNameUrl.subscribe(url => {
+      this.movieNames = url;
+    });
 
   }
 
