@@ -30,9 +30,7 @@ export class StarshipComponent {
     this.apiservice.currentShipUrl.subscribe(url => {
       this.imgUrl = url;
     })
- 
   
   }
-
   
 }

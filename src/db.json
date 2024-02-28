@@ -8,19 +8,25 @@
       "id": "3dd5"
     },
     {
-      "id": "7ca5",
-      "email": "pedro@gmail.com",
-      "password": "123456"
+      "email": "pedro.aragao.leite@gmail.com",
+      "password": "$2a$10$Ty/uDteW3TsHf/Vr1sIt..ktjIAHqbuLdeSTSOwyQTc7zD2u3z0XS",
+      "firstName": "Pedro",
+      "lastName": "Aragão",
+      "id": "n10sUKl"
     },
     {
-      "id": "086e",
-      "email": "pedro@gmail.com",
-      "password": "123456"
+      "email": "pedro1@gmail.com",
+      "password": "$2a$10$fltYv4wZIV23jwZgp4Qk/OE86/GxcZDPZE9Zbz58NWvc7lU6ye7MG",
+      "firstName": "Pedro",
+      "lastName": "Aragao",
+      "id": "F6dWJNH"
     },
     {
-      "id": "a0d0",
-      "email": "pedro@gmail.com",
-      "password": "123456"
+      "email": "pedro2@gmail.com",
+      "password": "$2a$10$OLyd9.uiu6/vfsOhlHMBPuUa7TaCjfNmK.q2ams9XAakzMFW3O54.",
+      "firstName": "Pedro",
+      "lastName": "Aragao",
+      "id": "01giGLv"
     }
   ]
 }

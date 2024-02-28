@@ -39,12 +39,12 @@ export class AuthService {
 
 
   register(user: User): Observable<User> {
-    user.password = bcrypt.hashSync(user.password as string, 12);
-    user.accessToken = "Fake token"
+    // user.password = bcrypt.hashSync(user.password as string, 12);
 
-    return this.http.post<User>(`${url}/users`, user, httpOptions)
+
+    return this.http.post<User>(`${url}/register`, user, httpOptions)
       .pipe(
-        map(user => {
+        map(user => {          
           if (user && user.accessToken) {
             localStorage.setItem('currentUser', JSON.stringify(user));
             localStorage.setItem('userToken', user.accessToken);
@@ -53,25 +53,26 @@ export class AuthService {
           } else {
             console.error('Token no recibido del backend');
           }
-          console.log(this.userToken);
-
           return user;
         })
       )
   }
 
-  login(data: string): Observable<User> {
-    return this.http.post<User>(`${url}/users`, data, httpOptions)
+  login(data: any): Observable<any> {
+    console.log(data);
+    
+    return this.http.post<any>(`${url}/login`, data, httpOptions)
       .pipe(
         map(res => {
-          res.accessToken = "Fake token"
+          // res.accessToken = "Fake token"
           console.log(res);
           if (res && res.accessToken!) {
-            localStorage.setItem('currentUser', JSON.stringify(res));
-            this.currentUserSubject.next(res);
+            localStorage.setItem('currentUser', res);
+            localStorage.setItem('userToken', res.accessToken);
+            this.currentUserSubject.next(res);             
+            this.userTokenSubject.next(res.accessToken);
           }
-          // localStorage.setItem('userToken', res.accessToken);
-          // this.userTokenSubject.next(res.accessToken);
+         
 
           return res;
         })
@@ -86,17 +87,6 @@ export class AuthService {
         map(users => users.length > 0)
       )
   }
-
-  // login(user: User): Observable<User> {
-  //   return this.http.post<User>(`${url}users`, user, httpOptions)
-  //     .pipe(
-  //       map(res => {
-  //         console.log(res);
-  //         return res;
-  //       })
-  //     )
-  // }
-
   logout() {
     // Remueve el usuario y el token del almacenamiento local
     localStorage.removeItem('currentUser');

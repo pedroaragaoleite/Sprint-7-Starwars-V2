@@ -35,8 +35,6 @@ export class RegisterComponent implements OnInit {
 
   onSubmit(): void {
     this.isSubmitted = true;
-    console.log(this.registerForm.valid);
-
 
     if (this.registerForm.valid) {
       const user: User = {
@@ -55,12 +53,11 @@ export class RegisterComponent implements OnInit {
               this.authService.register(user)
                 .subscribe({
                   next: (response: any) => {
-                    // this.authService.checkEmail(response.email)
-                    console.log(response);
-                    localStorage.setItem('currentUser', JSON.stringify(user));
-                    localStorage.setItem('userToken', user.accessToken as string);
-                    // localStorage.setItem('token', response.accessToken);
+                    if(response.accessToken) {
+                    localStorage.setItem('currentUser', JSON.stringify(response));
+                    localStorage.setItem('userToken', response.accessToken as string);
                     this.router.navigate(['/login']);
+                    }                    
                   },
                   error: error => {
                     console.error('Error durante el registro')

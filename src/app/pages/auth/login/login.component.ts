@@ -34,37 +34,6 @@ export class LoginComponent implements OnInit {
   onSubmit(): void {
     this.isSubmitted = true;
 
-    // if (this.loginForm.valid) {
-    //   // const user: User = {
-    //   //   user.email: this.loginForm.value.email as string,
-    //   //   password: this.loginForm.value.password as string,
-    //   // }
-    //   // console.log(email, password);
-    //   let data = this.loginForm.value;
-
-
-    //   this.authService.login(JSON.stringify(data))
-    //     .subscribe({
-    //       next: (res: any) => {
-    //         console.log(res);
-    //         console.log(this.authService.checkEmail(res.email));
-
-    //         if (res.password === data.password) {
-
-    //           this.router.navigate(['/starships'])
-    //         } else {
-    //           console.log("no email");
-
-    //         }
-    //       },
-    //       error: error => {
-    //         console.error('login invalido', error);
-
-    //       }
-    //     })
-    // }
-
-    // this.isSubmitted = true;
 
     if (this.loginForm.valid) {
       let data = {...this.loginForm.value};
@@ -72,12 +41,11 @@ export class LoginComponent implements OnInit {
       this.authService.checkEmail(data.email as string)
       .subscribe(emailExists => {
         if(emailExists) {
-      this.authService.login(data as string)
+      this.authService.login(data)
         .subscribe({
           next: (res: any) => {
-            console.log(res);
 
-            if (res.accessToken!) {
+            if (res.accessToken) {
               localStorage.setItem('userToken', res.accessToken);
               this.router.navigate(['/starships']);
             } else {
@@ -92,14 +60,9 @@ export class LoginComponent implements OnInit {
           console.log("Account or password invalid");
           
         }
-      })
-
-
+      });
     } else {
       console.log("Formulario no válido");
     }
-
-
   }
-
 }
