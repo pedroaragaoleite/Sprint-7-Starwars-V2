@@ -11,13 +11,18 @@ import { ApiStarwarsService } from '../../services/api-starwars.service';
 })
 export class PilotsComponent implements OnInit {
   pilotsArray: string[] = [];
+  ship: any;
 
-  constructor(private apiservice: ApiStarwarsService) {}
+  constructor(private apiservice: ApiStarwarsService) { }
 
   ngOnInit(): void {
     this.apiservice.currentPilotUrl.subscribe(url => {
       this.pilotsArray = url;
     })
+    this.apiservice.currentShip.subscribe(ship => {
+      this.ship = ship;
+    })
   }
-  
+
+
 }

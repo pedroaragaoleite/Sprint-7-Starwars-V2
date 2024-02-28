@@ -44,8 +44,8 @@ export class StarshipsComponent {
     const shipIdMatch = ship.url.match(/\/(\d+)\/$/);
     const id = shipIdMatch[1]
     this.apiservice.getShip(ship, id);
-    this.apiservice.getFilms(ship, id)
-    this.apiservice.getPilots(ship, id)
+    this.apiservice.getFilms(ship)
+    this.apiservice.getPilots(ship)
     // this.apiservice.getFilms(ship);
   }
 
