@@ -11,6 +11,7 @@ import { ApiStarwarsService } from '../../services/api-starwars.service';
 })
 export class PilotsComponent implements OnInit {
   pilotsArray: string[] = [];
+  pilotsNames: string[] = [];
   ship: any;
 
   constructor(private apiservice: ApiStarwarsService) { }
@@ -21,6 +22,9 @@ export class PilotsComponent implements OnInit {
     })
     this.apiservice.currentShip.subscribe(ship => {
       this.ship = ship;
+    })
+    this.apiservice.currentPilotNameUrl.subscribe(url => {
+      this.pilotsNames = url;
     })
   }
 

@@ -46,6 +46,7 @@ export class LoginComponent implements OnInit {
           next: (res: any) => {
 
             if (res.accessToken) {
+              localStorage.setItem('currentUser', JSON.stringify(data));
               localStorage.setItem('userToken', res.accessToken);
               this.router.navigate(['/starships']);
             } else {

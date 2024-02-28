@@ -21,6 +21,9 @@ export class ApiStarwarsService {
   private pilotImagesUrl = new BehaviorSubject<string[]>([]);
   currentPilotUrl = this.pilotImagesUrl.asObservable();
 
+  private pilotNamesUrl = new BehaviorSubject<string[]>([]);
+  currentPilotNameUrl = this.pilotNamesUrl.asObservable();
+
   constructor(private http: HttpClient) { }
 
   getShipsList(currentPage: number): Observable<StarshipResults> {
@@ -52,14 +55,30 @@ export class ApiStarwarsService {
       pilotsId.push(pilotId[1]);
     });
     console.log(pilotsId);
-
+    this.getPilotsNames(pilotsId);
     this.getPilotsImage(pilotsId);
 
-    this.resetPilotImages();
+    this.resetArrays();
   }
 
-  resetPilotImages() {
+  getPilotsNames(pilotsId: any) {
+    pilotsId.forEach((element: number) => {
+      console.log(element);
+      
+      this.http.get(`https://swapi.dev/api/people/${element}`)
+      .subscribe((pilotName: any) => {
+        let pilotNames = pilotName.name;
+        let pilotNameArray = [...this.pilotNamesUrl.value, pilotNames];
+        console.log(pilotNameArray);     
+        this.pilotNamesUrl.next(pilotNameArray)
+           
+      })
+    })
+  }
+
+  resetArrays() {
     this.pilotImagesUrl.next([]);
+    this.pilotNamesUrl.next([]);
   }
 
   getPilotsImage(pilotsId: any) {
