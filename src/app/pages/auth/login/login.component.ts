@@ -16,6 +16,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class LoginComponent implements OnInit {
   isSubmitted: boolean = false;
+  isInvalid:boolean = false;
   // isLogged:boolean = false;
 
 
@@ -65,6 +66,7 @@ export class LoginComponent implements OnInit {
         });
         } else {
           console.log("Account or password invalid");
+          // this.isInvalid = true;
           
         }
       });
