@@ -71,9 +71,7 @@ export class ApiStarwarsService {
 
 
   private fetchNames(urls: string[], type: 'pilots' | 'films'): void {
-
     const endpoints = type === 'pilots' ? 'people' : type;
-
     const requests = urls.map(url => this.fetchData<any>(`${apiStarWars}/${endpoints}/${url}`)
       .pipe(
         map(response => type === 'pilots' ? response.name : response.title)));
@@ -81,11 +79,8 @@ export class ApiStarwarsService {
     forkJoin(requests).subscribe(
       namesArray => {
         if (type === 'pilots') {
-          console.log(namesArray);
-
           this.pilotNamesUrl.next(namesArray)
         } else {
-          console.log(namesArray);
           this.movieNamesUrl.next(namesArray)
         }
       },
@@ -97,7 +92,6 @@ export class ApiStarwarsService {
 
   private fetchImages(urls: string[], type: "pilots" | "films") {
     const endpoints = type === 'pilots' ? 'characters' : type;
-  
     const requests = urls.map(id =>
       this.http.get(`${environment.apiImg}/${endpoints}/${id}.jpg`, { responseType: 'blob' })
         .pipe(
@@ -108,11 +102,9 @@ export class ApiStarwarsService {
           })
         )
     );
-  
+
     forkJoin(requests).subscribe(
       (imagesArray: any) => {
-        console.log(imagesArray);
-  
         if (type === 'pilots') {
           this.pilotImagesUrl.next(imagesArray);
         } else if (type === 'films') {

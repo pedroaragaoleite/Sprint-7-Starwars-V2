@@ -3,7 +3,7 @@
 
     &-title h4 {
         padding-bottom: 8px;
-        font-size: 24px !important;
+        // font-size: 24px !important;
         color: #ffffff !important;
     }
 
@@ -29,8 +29,8 @@
     }
 
     &-img img {
-        width:100%;
-        max-width:600px;
+        width: 100%;
+        max-width: 600px;
         height: 100%;
         object-fit: cover;
     }
@@ -60,10 +60,12 @@
 
 .pilots {
     margin-top: 20px;
+
     &-title {
-        border-top:1px solid gray ;
-        border-bottom:1px solid gray ;
+        border-top: 1px solid gray;
+        border-bottom: 1px solid gray;
     }
+
     &-title h4 {
         padding-bottom: 8px;
         font-size: 24px !important;
@@ -78,5 +80,5 @@
             grid-template-columns: 1fr;
             max-height: none;
         }
-    }  
+    }
 }

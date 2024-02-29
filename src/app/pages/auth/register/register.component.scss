@@ -115,7 +115,14 @@
     }
 }
 
+input[type='password'],
 input[type='text'],
 input[type='email'] {
     width: 100%;
+}
+
+.contact-invalid {
+    color: red;
+    font-size: 12px;
+    position: absolute;
 }

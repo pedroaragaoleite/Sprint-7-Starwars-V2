@@ -16,7 +16,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class LoginComponent implements OnInit {
   isSubmitted: boolean = false;
-  isInvalid:boolean = false;
+  isInvalid: boolean = false;
   // isLogged:boolean = false;
 
 
@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
 
   loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.email, emailValidator()]],
-    password: ['', [Validators.required,Validators.minLength(6)]]
+    password: ['', [Validators.required, Validators.minLength(6)]]
   })
 
 
@@ -42,34 +42,37 @@ export class LoginComponent implements OnInit {
 
 
     if (this.loginForm.valid) {
-      let data = {...this.loginForm.value};
+      let data = { ...this.loginForm.value };
 
       this.authService.checkEmail(data.email as string)
-      .subscribe(emailExists => {
-        if(emailExists) {
-      this.authService.login(data)
-        .subscribe({
-          next: (res: any) => {
+        .subscribe(emailExists => {
+          if (emailExists) {
+            this.authService.login(data)
+              .subscribe({
+                next: (res: any) => {
 
-            if (res.accessToken) {
-              localStorage.setItem('currentUser', JSON.stringify(data));
-              localStorage.setItem('userToken', res.accessToken);
-              this.router.navigate(['/starships']);
-              // this.isLogged = true;
-            } else {
-              console.error('Error en el login: No se recibió el token.');
-            }
-          },
-          error: error => {
-            console.error('Login inválido', error);
+                  if (res.accessToken) {
+                    localStorage.setItem('currentUser', JSON.stringify(data));
+                    localStorage.setItem('userToken', res.accessToken);
+                    this.router.navigate(['/starships']);
+                    // this.isLogged = true;
+                  } else {
+                    console.error('Error en el login: No se recibió el token.');
+                  }
+                },
+                error: error => {
+                  console.error('Login inválido', error);
+                  this.isInvalid = true;
+
+                }
+              });
+          } else {
+            console.log("Account or password invalid");
+            this.isInvalid = true;
+
+
           }
         });
-        } else {
-          console.log("Account or password invalid");
-          // this.isInvalid = true;
-          
-        }
-      });
     } else {
       console.log("Formulario no válido");
     }

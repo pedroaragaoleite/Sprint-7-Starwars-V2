@@ -4,7 +4,7 @@ import { environment } from '../../../environments/environment';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs';
 import { User } from '../../interfaces/user';
-import * as bcrypt from 'bcryptjs';
+
 
 
 const url = environment.apiBack;
@@ -42,18 +42,15 @@ export class AuthService {
 
 
   register(user: User): Observable<User> {
-    // user.password = bcrypt.hashSync(user.password as string, 12);
-
-
     return this.http.post<User>(`${url}/register`, user, httpOptions)
       .pipe(
-        map(user => {          
+        map(user => {
           if (user && user.accessToken) {
             localStorage.setItem('currentUser', JSON.stringify(user));
             localStorage.setItem('userToken', user.accessToken);
             this.currentUserSubject.next(user);
             this.userTokenSubject.next(user.accessToken);
-            
+
           } else {
             console.error('Token no recibido del backend');
           }
@@ -63,35 +60,28 @@ export class AuthService {
   }
 
   login(data: any): Observable<any> {
-    console.log(data);
-    
     return this.http.post<any>(`${url}/login`, data, httpOptions)
       .pipe(
         map(res => {
-          // res.accessToken = "Fake token"
-          console.log(res);
           if (res && res.accessToken!) {
             localStorage.setItem('currentUser', res);
             localStorage.setItem('userToken', res.accessToken);
-            this.currentUserSubject.next(res);             
+            this.currentUserSubject.next(res);
             this.userTokenSubject.next(res.accessToken);
             this.isLoggedSubject.next(true);
           }
-         
-
           return res;
         })
       );
   }
 
   checkEmail(email: string): Observable<boolean> {
-    console.log(email);
-
     return this.http.get<User[]>(`${url}/users?email=${email}`)
       .pipe(
         map(users => users.length > 0)
       )
   }
+
   logout() {
     // Remueve el usuario y el token del almacenamiento local
     localStorage.removeItem('currentUser');

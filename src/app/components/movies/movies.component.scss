@@ -1,0 +1,28 @@
+.movies {
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.card {
+    background-color: #000000;
+
+    &-title {
+        color: #ffffff;
+        font-size: 14px;
+        margin: 0;
+    }
+
+    &-body {
+        background-color: #242424;
+        padding: 12px;
+        border-bottom-right-radius: 10px;
+        border-bottom-left-radius: 10px;
+
+    }
+
+    &-img {
+        -webkit-box-shadow: 1px 1px 5px 0px rgba(255, 255, 255, 1);
+        -moz-box-shadow: 1px 1px 5px 0px rgba(255, 255, 255, 1);
+        box-shadow: 1px 1px 5px 0px rgba(255, 255, 255, 1);
+    }
+}

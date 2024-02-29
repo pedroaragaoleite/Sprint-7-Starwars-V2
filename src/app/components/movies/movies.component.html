@@ -1,16 +1,24 @@
 @if(filmsArray) {
-<div class="container-xl pilots">
-    <div class="pilots-title">
-        <h4 class="font-bold border-bottom border-secondary">FILMS</h4>
+<div class="container-xl movies">
+    <div class="movies-title border-top border-bottom border-secondary">
+        <h4 class="text-white font-bold py-2 ">FILMS</h4>
     </div>
-    <div class="pilots-card">
-        @for( img of filmsArray; track $index) {
-        <div class="shipdetails-img">
-            <img src="{{img}}" alt="Starship">
-            <p>{{movieNames[$index]}}</p>
-        </div>
-        }
+    <div class="row">
+        <div class="">
+            <div class="movies-card card d-flex flex-row gap-2">
+                @for( img of filmsArray; track $index) {
+                <div class="card-img">
+                    <img src="{{img}}" alt="Starship" class="card-img-top">
+                    <div class="card-body">
+                        <p class="card-title text-center text-uppercase">{{movieNames[$index]}}</p>
+                    </div>
 
+                </div>
+                }
+
+            </div>
+        </div>
     </div>
+
 </div>
 }
