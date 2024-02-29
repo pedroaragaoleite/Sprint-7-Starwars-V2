@@ -27,6 +27,9 @@ export class AuthService {
   private userTokenSubject: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(localStorage.getItem('userToken'));
   public userToken = this.userTokenSubject.asObservable();
 
+  private isLoggedSubject = new BehaviorSubject<boolean>(false);
+  isLogged$ = this.isLoggedSubject.asObservable();
+
   constructor(private http: HttpClient) {
     this.currentUserSubject = new BehaviorSubject<User | null>(JSON.parse(localStorage.getItem('currentUser') || 'null'));
     this.currentUser = this.currentUserSubject.asObservable();
@@ -50,6 +53,7 @@ export class AuthService {
             localStorage.setItem('userToken', user.accessToken);
             this.currentUserSubject.next(user);
             this.userTokenSubject.next(user.accessToken);
+            
           } else {
             console.error('Token no recibido del backend');
           }
@@ -71,6 +75,7 @@ export class AuthService {
             localStorage.setItem('userToken', res.accessToken);
             this.currentUserSubject.next(res);             
             this.userTokenSubject.next(res.accessToken);
+            this.isLoggedSubject.next(true);
           }
          
 
@@ -93,5 +98,6 @@ export class AuthService {
     localStorage.removeItem('userToken');
     this.currentUserSubject.next(null!);
     this.userTokenSubject.next(null);
+    this.isLoggedSubject.next(false);
   }
 }

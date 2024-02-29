@@ -15,6 +15,14 @@
     height: 100px;
 }
 
+.card-body {
+    border-radius: 10px !important;
+    -webkit-box-shadow: 2px 2px 5px 0px rgba(255,255,255,1);
+    -moz-box-shadow: 2px 2px 5px 0px rgba(255,255,255,1);
+    box-shadow: 2px 2px 5px 0px rgba(255,255,255,1);
+
+}
+
 @media only screen and (min-width: 768px) and (max-width: 992px) {
     .starships {
 

@@ -4,6 +4,7 @@ import { AuthService } from '../../../services/auth/auth.service';
 import { Router } from '@angular/router';
 import { User } from '../../../interfaces/user';
 import { emailValidator } from '../../../validators/customValidator';
+import { BehaviorSubject } from 'rxjs';
 
 
 @Component({
@@ -15,6 +16,10 @@ import { emailValidator } from '../../../validators/customValidator';
 })
 export class LoginComponent implements OnInit {
   isSubmitted: boolean = false;
+  // isLogged:boolean = false;
+
+
+
 
 
   loginForm = this.fb.group({
@@ -49,6 +54,7 @@ export class LoginComponent implements OnInit {
               localStorage.setItem('currentUser', JSON.stringify(data));
               localStorage.setItem('userToken', res.accessToken);
               this.router.navigate(['/starships']);
+              // this.isLogged = true;
             } else {
               console.error('Error en el login: No se recibió el token.');
             }

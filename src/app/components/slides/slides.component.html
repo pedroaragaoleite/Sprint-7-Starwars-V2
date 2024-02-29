@@ -1,24 +1,4 @@
 <main>
-    <section class="showcase">
-        <div class="showcase-slides">
-            @if(slideImgs) {
-            @for(img of slideImgs; track $index) {
-            @if($index === slide) {
-            <div class="showcase-img">
-                <img src="{{img.img}}" alt="">
-            </div>
-            }
-            }
-            }
-
-        </div>
-        <div class="showcase-btns">
-            <div class="showcase-arrow px-2">
-                <button (click)="prevSlide()" class="showcase-prev">&#10094;</button>
-                <button (click)="nextSlide()" class="showcase-next">&#10095;</button>
-            </div>
-        </div>
-    </section>
     <section class="hero">
         <div class="hero-text">
             <h2 class="hero-title text-center text-white fs-6 pt-3 text-uppercase">All of your favourite Starwars ships
@@ -35,4 +15,25 @@
 
         </div>
     </section>
+    <section class="showcase">
+        <div class="showcase-slides">
+            @if(slideImgs) {
+            @for(img of slideImgs; track $index) {
+            @if($index === slide) {
+            <div class="showcase-img">
+                <img class="img-fluid" src="{{img.img}}" alt="">
+            </div>
+            }
+            }
+            }
+
+        </div>
+        <div class="showcase-btns">
+            <div class="showcase-arrow px-2">
+                <button (click)="prevSlide()" class="showcase-prev">&#10094;</button>
+                <button (click)="nextSlide()" class="showcase-next">&#10095;</button>
+            </div>
+        </div>
+    </section>
+   
 </main>

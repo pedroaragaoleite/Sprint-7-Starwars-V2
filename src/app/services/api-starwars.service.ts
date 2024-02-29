@@ -63,22 +63,12 @@ export class ApiStarwarsService {
       let urlId = element.match(/\/(\d+)\/$/);
       urlsId.push(urlId[1]);
     });
-    console.log(urlsId);
+    // console.log(urlsId);
     this.fetchNames(urlsId, type)
     this.fetchImages(urlsId, type)
   }
 
-  // getImagesId(ship: any, type: "pilots" | "films") {
-  //   let urlsId: any = [];
-  //   console.log(ship);
 
-  //   ship[type].forEach((element: any) => {
-  //     let urlId = element.match(/\/(\d+)\/$/);
-  //     urlsId.push(urlId[1]);
-  //   });
-  //   console.log(urlsId);
-  //   this.fetchImages(urlsId, type)
-  // }
 
   private fetchNames(urls: string[], type: 'pilots' | 'films'): void {
 
@@ -96,7 +86,6 @@ export class ApiStarwarsService {
           this.pilotNamesUrl.next(namesArray)
         } else {
           console.log(namesArray);
-
           this.movieNamesUrl.next(namesArray)
         }
       },
@@ -104,9 +93,12 @@ export class ApiStarwarsService {
     )
   }
 
+
+
   private fetchImages(urls: string[], type: "pilots" | "films") {
     const endpoints = type === 'pilots' ? 'characters' : type;
-    urls.forEach((id: any) => {
+  
+    const requests = urls.map(id =>
       this.http.get(`${environment.apiImg}/${endpoints}/${id}.jpg`, { responseType: 'blob' })
         .pipe(
           map(blob => URL.createObjectURL(blob)),
@@ -115,22 +107,20 @@ export class ApiStarwarsService {
             return of('../../../assets/images/image-not-found.png');
           })
         )
-        .subscribe(url => {
-          let imagesArray;
-          if (type === 'pilots') {
-            imagesArray = [...this.pilotImagesUrl.value, url];
-            this.pilotImagesUrl.next(imagesArray);
-            console.log(imagesArray);
-
-          } else if (type === 'films') {
-            imagesArray = [...this.filmImagesUrl.value, url];
-            console.log(imagesArray);
-
-            this.filmImagesUrl.next(imagesArray);
-          }
-          // console.log(imagesArray);
-        });
-    });
+    );
+  
+    forkJoin(requests).subscribe(
+      (imagesArray: any) => {
+        console.log(imagesArray);
+  
+        if (type === 'pilots') {
+          this.pilotImagesUrl.next(imagesArray);
+        } else if (type === 'films') {
+          this.filmImagesUrl.next(imagesArray);
+        }
+      },
+      error => console.error("error fetching data: ", error)
+    );
   }
 
   getShipImage(id: number) {
@@ -155,7 +145,4 @@ export class ApiStarwarsService {
     this.movieNamesUrl.next([]);
     this.filmImagesUrl.next([]);
   }
-
-
-
 }

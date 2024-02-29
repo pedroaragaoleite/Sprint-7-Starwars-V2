@@ -29,11 +29,18 @@
       "id": "01giGLv"
     },
     {
-      "email": "teste@gmail.com",
-      "password": "$2a$10$thYWrP8LmJ.S56TkQ81ece2IVVJ/48tNfZHJK8iIzdKi1I9BpZ3Re",
+      "email": "pedro.aragao.leite1@gmail.com",
+      "password": "$2a$10$ieWmtRfHNfijxtPJ4IClC.QwIcKzB60FSo82KV3ROjXapPwr3vXAe",
       "firstName": "Pedro",
       "lastName": "Aragão",
-      "id": "744jKdt"
+      "id": "r508f1e"
+    },
+    {
+      "email": "teste@gmail.com",
+      "password": "$2a$10$OqSOPKV9gIBkuk6GReVvKuqiIwkmMUSfBEGF0Y/kQmIRREE8rG1ny",
+      "firstName": "Pedro",
+      "lastName": "Aragão",
+      "id": "Jt8jkjw"
     }
   ]
 }

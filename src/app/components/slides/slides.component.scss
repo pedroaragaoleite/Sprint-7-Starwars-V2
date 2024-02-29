@@ -2,6 +2,8 @@
     width: 80%;
     margin: 0 auto;
     // height: calc(100% - 155px);
+    position: relative;
+    margin-top: 2px;
 
 
     &-slides {
@@ -21,7 +23,8 @@
     &-btns {
         position: absolute;
         top: 50%;
-        width: 80%;
+        width: 100%;
+        
     }
 
     &-arrow {
@@ -63,6 +66,7 @@
         top: 50%;
         left: 250px;
         // opacity: .5;
+        z-index: 1;
 
         &_text {
             font-weight: 700;
