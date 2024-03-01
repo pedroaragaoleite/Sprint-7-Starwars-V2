@@ -1,5 +1,5 @@
 .showcase {
-    width: 80%;
+    width: 100%;
     margin: 0 auto;
     // height: calc(100% - 155px);
     position: relative;
@@ -8,15 +8,20 @@
 
     &-slides {
         position: relative;
-        height: 100vh;
+        // height: 100vh;
     }
 
     &-img {
 
         & img {
             // height: 100%;
-            height: 100vh;
-            width: 100%;
+            // height: 100vh;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+            // width: 100%;
+            // aspect-ratio: auto 1600 / 686;
         }
     }
 
@@ -24,15 +29,15 @@
         position: absolute;
         top: 50%;
         width: 100%;
-        
+
     }
 
     &-arrow {
         position: absolute;
         display: flex;
         justify-content: space-between;
-        top: 70%;
-        // transform: translateY(-50%);
+        top: 50%;
+        transform: translateY(-50%);
         width: 100%;
     }
 
@@ -57,20 +62,88 @@
 }
 
 .hero {
-
-
     &-cta {
         // background-color: #000000;
-        padding: 50px;
+        // padding: 50px;
         position: absolute;
-        top: 50%;
-        left: 250px;
+        top: 30%;
+        left: 10%;
         // opacity: .5;
         z-index: 1;
 
         &_text {
             font-weight: 700;
-            text-transform: uppercase;
         }
     }
+
+    &-btn {
+        padding: 14px 24px;
+        background-color: #FADE4B;
+        border: #FADE4B;
+        font-weight: 700;
+        font-size: 0.875rem;
+        width: 100%;
+        border-radius: 30px;
+    }
+}
+
+
+
+@media screen and (max-width: 1024px) {
+    .showcase {
+
+        &-prev,
+        &-next {
+            width: 30px;
+            height: 30px;
+            background-color: gray;
+            color: #000000;
+            font-size: 16px;
+            border-radius: 50%;
+        }
+
+
+    }
+
+    .hero {
+        &-cta {
+            top: 25%;
+
+            &_text {
+                font-weight: 700;
+
+            }
+        }
+
+        &-btn {
+            padding: 14px 24px;
+            background-color: #FADE4B;
+            border: #FADE4B;
+            font-weight: 700;
+            font-size: 0.875rem;
+            width: 100%;
+            border-radius: 30px;
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .hero {
+        &-cta {
+            top: 20%;
+
+            &_text {
+                font-weight: 700;
+
+                h1 {
+                    font-size: 24px !important;
+                }
+
+                p {
+                    font-size: 16px !important;
+                }
+            }
+        }
+    }
+
 }

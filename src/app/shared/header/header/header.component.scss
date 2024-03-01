@@ -11,3 +11,36 @@
     margin-right: 94px;
     margin-top: 10px;
 }
+
+.menu-btn {
+    color: #ffffff !important;
+    border: none !important;
+    background: none !important;
+}
+
+.menu-btn:hover {
+    color: #FADE4B !important;
+}
+
+@media screen and (max-width: 768px) {
+    .header-icons {
+        margin-left: 0;
+    }
+
+    .header-user {
+        margin-right: 0;
+    }
+
+    .header-link i {
+        font-size: 16px !important;
+    }
+
+    .menu-login a {
+        font-size: 12px !important;
+    }
+
+    .header-img {
+        width: 120px;
+        height: 60px;
+    }
+}

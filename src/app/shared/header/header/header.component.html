@@ -15,18 +15,21 @@
         </div>
         <div class="header-logo d-flex">
             <a routerLink="/" aria-label="Inicio">
-                <img src="../../../assets/images/sw_logo.png" width="185px" height="80px" alt="StarWars">
+                <img class="header-img" src="../../../assets/images/sw_logo.png" width="185px" height="80px"
+                    alt="StarWars">
             </a>
         </div>
         <div class="header-user">
             <ul class="header-menu d-flex">
                 @if(!isLogged) {
-                     <li class="header-login pe-4"><a routerLink="/login" class="fs-6">LOG IN</a></li>
-                <li class="header-sign"><a routerLink="register" class="fs-6">SIGN UP</a></li>
+                <li class="header-login pe-4 menu-login"><a routerLink="/login" class="fs-6">LOG IN</a></li>
+                <li class="header-sign menu-login"><a routerLink="register" class="fs-6">SIGN UP</a></li>
                 } @else {
-                <li class="header-sign"><button (click)="logOut()" routerLink="home" class="fs-6">LOG OUT</button></li>
+                <li class="header-sign menu-login"><button (click)="logOut()" routerLink="home"
+                        class="fs-6 menu-btn">LOG
+                        OUT</button></li>
                 }
-               
+
             </ul>
         </div>
     </nav>

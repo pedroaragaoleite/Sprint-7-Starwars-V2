@@ -38,6 +38,10 @@ a {
     color: #ffffff;
 }
 
+a:hover {
+    color: #FADE4B;
+}
+
 img {
     display: block;
     max-width: 100%;
@@ -60,4 +64,8 @@ body {
 h4 {
     font-size: 18px !important;
     margin-bottom: 0 !important;
+}
+
+.ng-invalid {
+    border-left-color: red !important;
 }

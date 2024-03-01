@@ -27,8 +27,12 @@ export class AuthService {
   private userTokenSubject: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(localStorage.getItem('userToken'));
   public userToken = this.userTokenSubject.asObservable();
 
-  private isLoggedSubject = new BehaviorSubject<boolean>(false);
-  isLogged$ = this.isLoggedSubject.asObservable();
+  private isLoggedSubject = new BehaviorSubject<boolean>(this.hasToken());
+
+  get isLogged$(): Observable<boolean> {
+    return this.isLoggedSubject.asObservable();
+  }
+
 
   constructor(private http: HttpClient) {
     this.currentUserSubject = new BehaviorSubject<User | null>(JSON.parse(localStorage.getItem('currentUser') || 'null'));
@@ -89,5 +93,9 @@ export class AuthService {
     this.currentUserSubject.next(null!);
     this.userTokenSubject.next(null);
     this.isLoggedSubject.next(false);
+  }
+
+  private hasToken(): boolean {
+    return !!localStorage.getItem('userToken')
   }
 }

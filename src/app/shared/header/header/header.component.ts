@@ -13,27 +13,27 @@ import { Subscription } from 'rxjs';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent implements OnInit {
-  
-isLogged:boolean = false;
 
-private subscription: Subscription = new Subscription();
+  isLogged: boolean = false;
+
+  private subscription: Subscription = new Subscription();
 
 
-constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService) { }
 
-ngOnInit(): void {
+  ngOnInit(): void {
     this.subscription = this.authService.isLogged$.subscribe(
       (isLogged) => {
         this.isLogged = isLogged;
       }
     )
-}
+  }
 
-ngOnDestroy() {
-  this.subscription.unsubscribe();
-}
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 
-logOut() {
-this.authService.logout();
-}  
+  logOut() {
+    this.authService.logout();
+  }
 }

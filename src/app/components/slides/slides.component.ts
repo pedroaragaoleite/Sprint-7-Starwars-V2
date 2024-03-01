@@ -1,11 +1,13 @@
 import { Component, Input } from '@angular/core';
 import { SlideData } from '../../interfaces/slide-data';
-import { setActiveConsumer } from '@angular/core/primitives/signals';
+import { RouterLink } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-slides',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './slides.component.html',
   styleUrl: './slides.component.scss'
 })
