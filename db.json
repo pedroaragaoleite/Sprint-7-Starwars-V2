@@ -28,6 +28,13 @@
       "id": "dbd4",
       "email": "pedro@gmail.com",
       "password": "123456"
+    },
+    {
+      "email": "teste55@gmail.com",
+      "password": "$2a$10$jlq7cUJwdnPLvlMhyENtkOHR2Mp8pxtSG3r/LsmMOG33qMcH99ptG",
+      "firstName": "teste",
+      "lastName": "teste2",
+      "id": "RNo7ja3"
     }
   ]
 }
